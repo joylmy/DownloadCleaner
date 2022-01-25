@@ -51,7 +51,7 @@ extension_paths = {
     ".tif": "media/images",
     ".tiff": "media/images",
     ".cr2": "media/images",
-    ".HEIC": "media/images",
+    ".heic": "media/images",
     # internet
     ".asp": "other/internet",
     ".aspx": "other/internet",
@@ -67,13 +67,13 @@ extension_paths = {
     ".7z": "other/compressed",
     ".arj": "other/compressed",
     ".deb": "other/compressed",
-    ".pkg": "other/compressed",
     ".rar": "other/compressed",
     ".rpm": "other/compressed",
     ".tar.gz": "other/compressed",
     ".z": "other/compressed",
     ".zip": "other/compressed",
     # software
+    ".pkg": "other/software",
     ".bin": "other/software",
     ".dmg": "other/software",
     ".iso": "other/software",
