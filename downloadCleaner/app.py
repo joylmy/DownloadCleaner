@@ -15,7 +15,7 @@ from EventHandler import DownloadsCleanEventHandler
 if __name__ == "__main__":
     # / only for path object
     watch_path = Path.home() / "Downloads"
-    # TODO:event_handler : FileSystemEventhandler,
+    # event_handler extends FileSystemEventhandler,
     event_handler = DownloadsCleanEventHandler(watch_path)
     # recursive=True watch the whole directory  
     observer = Observer()
@@ -23,8 +23,9 @@ if __name__ == "__main__":
     observer.start()
     try:
         while True:
-            time.sleep(2)
-            print('observe')
+            # execute every 30 mins
+            time.sleep(1800)
+            # print('observe')
     except KeyboardInterrupt:
         observer.stop()
     # This blocks the calling thread until the thread whose join() method is called terminates – either normally or through an unhandled exception or until the optional timeout occurs.

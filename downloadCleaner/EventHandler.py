@@ -17,10 +17,6 @@ import stat
 
 class DownloadsCleanEventHandler(FileSystemEventHandler):
     def __init__(self, path: Path):
-        # BUG: self.files shall be dynamic, not be fixed at __init,
-        # That's why it cannot configured modification of dir
-        # TODO: fix this in on_modified
-        self.files = [f for f in path.iterdir() if f.is_file()]
         self.path = path
 
     def rename_file(self,file:Path,dist:Path):
@@ -45,23 +41,24 @@ class DownloadsCleanEventHandler(FileSystemEventHandler):
 
         
     def on_modified(self, event):
-        print("call on_modified")
-        for f in self.files:
-            # .DS_Store doesn't count as suffix
+        # print("call on_modified")
+        files = [f for f in self.path.iterdir() if f.is_file()]
+        for f in files:
+            # .DS_Store doesn't count as suffix,skip it
             if f.name == '.DS_Store':
                 continue        
             suffix = f.suffix.lower()
             # check if suffix in extension_paths dict. if yes, then move file to that dir
             if suffix in extension_paths:
-                # dist here is folder
                 dist = self.path / extension_paths[suffix]
                 # check if folder exists
+                # os.chmod apply to all folders
                 if not dist.exists():
                     os.makedirs(dist, mode=711)
                     os.chmod(dist, stat.S_IRWXU)
                 dist = self.rename_file(f,dist)
                 shutil.move(src=f, dst=dist)
-                print("Moved f to",dist)
+                # print("Moved f to",dist)
             else:
                 # move to other dir
                 dist = self.path / "other"
