@@ -23,8 +23,8 @@ if __name__ == "__main__":
     observer.start()
     try:
         while True:
-            # execute every 30 mins
-            time.sleep(1800)
+            # execute every 3 mins
+            time.sleep(120)
             # print('observe')
     except KeyboardInterrupt:
         observer.stop()
